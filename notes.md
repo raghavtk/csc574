@@ -56,7 +56,7 @@ Today:
 - When integrity over confidentiality? social media, open-source code, your signature on a public form,
 
 
-### which is the most important? depends on your security model, i.e., the context.
+### Which is the most important? depends on your security model, i.e., the context.
 
 Guesses from the class:
 Privacy
@@ -115,51 +115,53 @@ fundamental difference between security and safety/reliability/quality is becaus
 - foreign or domestic espionage
 
 ## Threat: some potential violation of your security model.
-- can be intentional or accidental
-
-a potential for violation of security, which
+- Can be intentional or accidental
+- Potential for violation of security, which
 
 
 ## Vulnerability: a flaw that exposes the user, data or system to a threat.
 Eg. Buffer overflows, WEP key leakage etc.
 where do they come from? bad software or hardware.
 Poor understanding of requirements/bad design
-bady policy/configuration
-system misuse
-unitended purpose or environment
+Bad policy/configuration
+System misuse
+Unitended purpose or environment
 
-- vulnerability: can be latent and may be protected by other code
+- Vulnerabilities can be latent and may be protected by other code
 so a vulnerability still exists,
 
-Vulnerability exists if it can be exploited.
+- A vulnerability exists if it can be exploited.
 
 
-## Attack: occurs when adversary attempts to exploit a vulnerability.
-Compromise: Occurs when an attack is successful. The data can be used in some way.
+## Attack:
+- Occurs when adversary attempts to exploit a vulnerability.
+## Compromise:
+- Occurs when an attack is successful. The data can be used in some way.
 
 ## Risk:
 Risk is often defined as:
 
 R = T*V*C, where
-T= threat information(probability instantiated at a given time)
-V= existence of vulnerabilities
-C= cost of impact
+T = Threat information(probability instantiated at a given time)
+V = Existence of vulnerabilities
+C = Cost of impact
 
-sometimes R = P*C
-p = probability attacker is successful
+Sometimes, R = P*C
+p = Probability attacker is successful
 
-Threat model: Systematic identification of the threats a systems faces
-Capability + Motive
+## Threat model:
+- Systematic identification of the threats a systems faces
+- Capability + Motive
 
-Attack archetypes:
+## Attack archetypes:
 
-Attacks 
+### Attacks
 - Interception: Unauthorize access to an asset
 - Modification: Unauthorized changes to an asset
 - Fabrication: Creation of fake objects: files, messages etc.
 - Interruption: Asset is "lost, unavailable, unusable
 
-Defenses:
+### Defenses:
 
 - Prevention: Block the attack or close the vulnerability(P&P)
 - Deterrence: Make attack harder
@@ -167,8 +169,11 @@ Defenses:
 - Detection: Detect attack in progress and try to do something
 - Recovery: Assume attack and just plan to fix things later
 
-Conferences for Cyber Security for ideas
-blackhat, defcon, bsides
+# Conferences for Cyber Security for ideas
+1. Blackhat
+2. DefCon
+3. Bsides
+
 
 # 01/20: Notes
 
@@ -191,33 +196,33 @@ Specify our policies and security in terms of identity.
 
 - Trusted Computing Base(TCB) is the parts of the system you trust.
 
-A trustworthy system or component is one that won't fail.
+- A trustworthy system or component is one that won't fail.
 
 
 The greater your risk, the more mechanisms you require to ensure your system is trustworthy.
 
 Conservation of trust principle:
 
-as much trust into the system as possible
+As much trust into the system as possible
 
-not all trusted systems are trustworthy
+Not all trusted systems are trustworthy
 All trustworthy systems are trusted
 
 Security model = trust + threat
 
 1. What are the risks? Threats?
 2. Who are our adversaries
-3. who do we trust and to do what
-4. the "security requirements" use to develop some cogent and comprehensive design
+3. Who do we trust and to do what
+4. The "security requirements" use to develop some cogent and comprehensive design
 5. What are the assets?
 6. Are the defenses adequate to the value of the assets?
 
 Every design must have a security model
 
 It's not easy because,
-1. threats and adversaries change over time.
+1. Threats and adversaries change over time.
 2. New attacks emerge
-3. very hard to retrofit - adding new functionality is always a pain
+3. Very hard to retrofit - adding new functionality is always a pain
 
 
 ## Cost:
@@ -228,8 +233,8 @@ It's not easy because,
 
 - Systems must be protected to a degree consistent with their value.
 - Systems must be protected only until they lose their value.
-- basic microeconomics: Decide something which maximizes the resources you have
-- unlikely attacks probably won't merit protection
+- Basic microeconomics: Decide something which maximizes the resources you have
+- Unlikely attacks probably won't merit protection
 - Cost of deployment is less than the expected cost of compromise.
 
 ### Basic terminology is done
@@ -249,11 +254,11 @@ Alice sends a message to Bob in a public place.
 ### Integrity
 ### Availability
 
-- It can't solve buffer overflows, worms, viruses, trojan horses, SQL injection attacks, cross-site scripting, bad programming practices etc.
+- It can't solve buffer overflows, worms, viruses, Trojan horses, SQL injection attacks, cross-site scripting, bad programming practices etc.
 - It is a tool, not a solution
 
 - None of us can make ciphers, we can design a basic protocol on top of it at the end of the class
-- use pre existing things
+- Use pre-existing libraries, packages, any constructs, things like that while designing your own protocol, for instance. 
 
 ### Terminology:
 
@@ -275,7 +280,7 @@ Alice sends a message to Bob in a public place.
 - Input to a cryptographic algorithm used to maintain security in the presence of an adversary.
 - Keyspace: Set of all possible keys in a cryptosystem.
 - Easiest way for attackers is to get the keys, larger keyspace makes it harder, large keyspace doesn't guarantee security.
-- Kirchoffs principle: assume the enemy knows the system so if they get your cipher, they can reverse engineer it.
+- Kirchoffs principle: Assume the enemy knows the system so if they get your cipher, they can reverse engineer it.
 
 - Easier to change a key
 - Harder to keep an algorithm secret
@@ -288,7 +293,7 @@ Alice sends a message to Bob in a public place.
 - How do they store them?
 
 ### Security of a cryptosystem:
-- recovering the key, the plaintext(full) or partial, being able to produce a valid ciphertext, and being able to decipher an existing ciphertext.
+- Recovering the key, the plaintext(full) or partial, being able to produce a valid ciphertext, and being able to decipher an existing ciphertext.
 - 
 
 ### Cryptoanalysis:
@@ -309,27 +314,102 @@ Alice sends a message to Bob in a public place.
 
 # Notes: 01/22
 
-## Ciphers
+# Ciphers
 
-### Caesar Cipher
+## Caesar Cipher
 
 - Shift cipher
 - ROT-13 - Shifts everything by 13 places
 - Easy to do by hand
 - Easy to break as well
 
-## One-time pad guarantees
+# One-time pad(OTP) guarantees
 
-- offers "perfect secrecy"
-- after message is sent, key material is destroyed
-- you XOR anything twice, you reverse the operation. ((A xor B) xor B) = A)
+- Offers "perfect secrecy"
+- After the message is sent, key material is destroyed
+- You XOR anything twice, you reverse the operation. ((A xor B) xor B) = A)
 
-- The encruption is to XOR the data with the secret bit string.
+- The encryption is to XOR the data with the secret bit string.
+
+- A system has perfect secrecy if,
+- - Knowledge of the ciphertext yields no information about what the plaintext might be
+- - There is always a key that maps any message to any ciphertext(these are equivalent)
+
+- One-time pad is impossible to break, you cannot do better than it for confidentiality
+- Two-time pad is trivial to break; it's terrible
+- Thinking using something too many things is better works
+
+## Questions:
+1. If you use it twice, it makes it a Legionnaire cipher.
+2. One-time pad offers secrecy, but not integrity.
+ So when it's decrypted, the message flips, you can change the message basically.
+3. Malleable: An adversary can control the input and know that they have manipulated it
+ We'll see how to prevent it also
+4. Do we assume the adversary knows the length of the message? Yes.
+5. Mayb
+
+### Things about one-time pads:
+- Smart
+- Good-to-know
+- Not used that much
+- This comes under the category of unconditional or probabilistic security
+
+# Symmetric key cryptography
+
+## Conditional or Computational Security
+
+- Cryptosystem is secure assuming a computationally bounded adversary, or under certain hardness assumptions, e.g., P<>NP
+- Key sizes are much smaller, 128 bits.
+
+## Block Ciphers vs Stream Ciphers
+
+## Stream Ciphers:
+
+- Generates a long keystream from a (short) key
+- Acts like a random number generator with they key(and other info.) as the seed.
+- The keystream can be used like the pad in a OTP
+- No perfect secrecy
+- Pseudorandom generation means not all keys are possible
+- C{K} = pseudorandom stream produced using key K
+
+- Countermeasure is to use IV(Initialization vector)
+- IV is sent in clwar and is combined with K to produce pseudorandom sequence
+- What if IV space is too small? IV space has to be same length as the key
+- IV doesn't give away any info about the message
+
+### Side notes on True and Pseudo-Randomness:
+
+- True randomness is:
+- - Uniform distribution of bits and
+- - Independence
+- Pseudorandomness is:
+- - Approximately uniform distribution of bits
+- - Cannot be independent since they are deterministically generated
 
 
+## Block ciphers:
 
+- Confusion hides the relationship between the ciphertext and the key.
+- Diffusion hides the relationship between the plaintext and the ciphertext
+- Distributive plaintext statistics over the ciphertext.
+- Make statistical analysis hard
+- Most of them is some function of the initial key.
 
+### Types of block ciphers:
+- Data encryption Standard(DES) was released in the 70s and was weak then.
+- - 56 bit keys, 64 bit block size. 
+- - Variant: 3DES, better than DES, but still deprecated.
+- Advanced encryption standard: Newer(2001)
+- - 128-, 192, and 256-bit key lengt. Nobody uses 192 because they either need the smallest or the biggest lol.
+- - 128 bit blocks which is long enough
+- - Widely used
+- - This is the block cipher you should use for newer systems
 
+- Principle for cipher design: 
+- - Nothing up your sleeves - All your choices for function design are transparent and you can't do anything badly
+
+- Confusion - Relationship between key and data
+- Permutation - Hiding the underlying distribution of data, but they both work together.
 
 
 
