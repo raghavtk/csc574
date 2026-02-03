@@ -1,19 +1,18 @@
 # Computer Network Security: CSC574
 
-# Notes: 13/01
+# Lecture 1: 13/01: Notes
 
 ## What do you hope to learn in this course
 
 1. Learn the fundamentals of security, layer by layer
 2. Learn good practices and writing secure code
 3. Different kinds of attacks and how the design should have been better to ensure those didn't happen
-4. how do you design systems that are secure maybe use of AI in mobile network security stuff?
-how do mobile networks
+4. How do you design systems that are secure maybe use of AI in mobile network security stuff?
+5. How do mobile networks work i guess?
+6. Systems attacks and defences
 
-systems attacks and defences
-
-reading is 10% of grade
-project
+- reading is 10% of the grade
+- project
 
 ## What does it mean for a system to be secure?
 
@@ -25,16 +24,16 @@ project
 
 ## Important definitons
 
-- If it can maintain well-specified properties despite the actions of well-specified adversaries. - IMPORTANT
+- Security: If it can maintain well-specified properties despite the actions of well-specified adversaries. - IMPORTANT
 
 - The set of properties we assume to be correct is called the trust model
 
-- The set of adversaries and their capability we assume to be correct is called the threat model
+- The set of adversaries and their capabilities we assume to be correct is called the threat model
 
 - Trust model + threat model = security model
 
 
-# Notes: 15/01
+# Lecture 2: 15/01 Notes: 
 
 
 ## What we'll be tested on:
@@ -58,22 +57,21 @@ Today:
 
 ### Which is the most important? depends on your security model, i.e., the context.
 
-Guesses from the class:
-Privacy
-P-authentication
-P-authorization
-attack surface - hmm
-cost - hmm
+#### Guesses from the class:  
+Privacy  
+P - Authorization  
+Attack surface - hmm  
+Cost - hmm  
 
-Extra in the list:
-resiliency
-non-repudiation
+Extra in the list:  
+resiliency  
+non-repudiation  
 
-I - auditability
-accounting
-non-repudiation
+I - auditability  
+accounting  
+non-repudiation  
 
-anonymity is completely different from privacy
+- Anonymity is completely different from privacy
 
 ## Assets: What we protect:
 
@@ -84,35 +82,35 @@ anonymity is completely different from privacy
 9. Money managed by system
 
 ## Participants: computers, agents, people, enterprises. Sometimes referred to as: principals, servers, clients, users, entities, hosts, routers
-- expected systems, entities.
+- Expected systems, entities.
 - Security is defined w.r.t these entities.
-- every party may have unique view.
+- Every party may have unique view.
 
-## A trusted third party = trusted by all parties for some set of actions, often used as introducer or arbiter
+#### A trusted third party = trusted by all parties for some set of actions, often used as introducer or arbiter
 
 
 ## Adversaries:
 Anyone attempting to violate your trust model: circumvent the security infrastructure.
 
-fundamental difference between security and safety/reliability/quality is because of the notion of an adversary.
+Fundamental difference between security and safety/reliability/quality is because of the notion of an adversary.
 
 ## Characterizing adversaries:
 
 ### Capabilities:
 
-1. generally clueless
-2. script kiddies
-3. engineers
-4. insiders
-5. military/intelligence agencies
+1. Generally clueless
+2. Script kiddies
+3. Engineers
+4. Insiders
+5. Military/intelligence agencies
 
 ### Motivation:
-- curiosity or social credit   
-- hacktivism  
-- industrial espionage  
-- financial gain
-- weaken geopolitical adversary
-- foreign or domestic espionage
+- Curiosity or social credit   
+- Hacktivism  
+- Industrial espionage  
+- Financial gain
+- Weaken geopolitical adversary
+- Foreign or domestic espionage
 
 ## Threat: some potential violation of your security model.
 - Can be intentional or accidental
@@ -121,7 +119,7 @@ fundamental difference between security and safety/reliability/quality is becaus
 
 ## Vulnerability: a flaw that exposes the user, data or system to a threat.
 Eg. Buffer overflows, WEP key leakage etc.
-where do they come from? bad software or hardware.
+Where do they come from? bad software or hardware.
 Poor understanding of requirements/bad design
 Bad policy/configuration
 System misuse
@@ -175,7 +173,7 @@ p = Probability attacker is successful
 3. Bsides
 
 
-# 01/20: Notes
+# Lecture 3: 01/20: Notes
 
 ## Authentication: Who are you
 Specify our policies and security in terms of identity.
@@ -188,7 +186,7 @@ Specify our policies and security in terms of identity.
 - Most situations don't have a situation where everyone has equal privilege
 
 
-## Trust: How much an entity is expected to behave
+## Trust: How much is an entity is expected to behave?
 - Degree to which an entity is dependent on it to behave.
 - If the trust is violated, the security model is violated
 
@@ -252,6 +250,7 @@ Alice sends a message to Bob in a public place.
 ### Confidentiality:
 - Keep data and communication secret
 ### Integrity
+- Maintain the contents of the data basically.
 ### Availability
 
 - It can't solve buffer overflows, worms, viruses, Trojan horses, SQL injection attacks, cross-site scripting, bad programming practices etc.
@@ -273,8 +272,8 @@ Alice sends a message to Bob in a public place.
 - G(keygen algorithm)
 - E and D are the encryption and decryption keys respectively.
 
-### Symmetric key cryptography: Enc. and Dec. keys are the same.
-### Asymmetric key cryptography: Enc. and Dec. keys are different.
+#### Symmetric key cryptography: Enc. and Dec. keys are the same.
+#### Asymmetric key cryptography: Enc. and Dec. keys are different.
 
 ### Key: 
 - Input to a cryptographic algorithm used to maintain security in the presence of an adversary.
@@ -312,7 +311,7 @@ Alice sends a message to Bob in a public place.
 ### Key recovery attacks:
 
 
-# Notes: 01/22
+# Lecture 4: Notes: 01/22
 
 # Ciphers
 
@@ -332,8 +331,8 @@ Alice sends a message to Bob in a public place.
 - The encryption is to XOR the data with the secret bit string.
 
 - A system has perfect secrecy if,
-- - Knowledge of the ciphertext yields no information about what the plaintext might be
-- - There is always a key that maps any message to any ciphertext(these are equivalent)
+    - Knowledge of the ciphertext yields no information about what the plaintext might be
+    - There is always a key that maps any message to any ciphertext(these are equivalent)
 
 - One-time pad is impossible to break, you cannot do better than it for confidentiality
 - Two-time pad is trivial to break; it's terrible
@@ -380,11 +379,11 @@ Alice sends a message to Bob in a public place.
 ### Side notes on True and Pseudo-Randomness:
 
 - True randomness is:
-- - Uniform distribution of bits and
-- - Independence
+    - Uniform distribution of bits and
+    - Independence
 - Pseudorandomness is:
-- - Approximately uniform distribution of bits
-- - Cannot be independent since they are deterministically generated
+    - Approximately uniform distribution of bits
+    - Cannot be independent since they are deterministically generated
 
 
 ## Block ciphers:
@@ -397,19 +396,169 @@ Alice sends a message to Bob in a public place.
 
 ### Types of block ciphers:
 - Data encryption Standard(DES) was released in the 70s and was weak then.
-- - 56 bit keys, 64 bit block size. 
-- - Variant: 3DES, better than DES, but still deprecated.
+    - 56 bit keys, 64 bit block size. 
+    - Variant: 3DES, better than DES, but still deprecated.
 - Advanced encryption standard: Newer(2001)
-- - 128-, 192, and 256-bit key lengt. Nobody uses 192 because they either need the smallest or the biggest lol.
-- - 128 bit blocks which is long enough
-- - Widely used
-- - This is the block cipher you should use for newer systems
+    - 128-, 192, and 256-bit key lengt. Nobody uses 192 because they either need the smallest or the biggest lol.
+    - 128 bit blocks which is long enough
+    - Widely used
+    - This is the block cipher you should use for newer systems
 
 - Principle for cipher design: 
-- - Nothing up your sleeves - All your choices for function design are transparent and you can't do anything badly
+    - Nothing up your sleeves - All your choices for function design are transparent and you can't do anything badly
 
 - Confusion - Relationship between key and data
 - Permutation - Hiding the underlying distribution of data, but they both work together.
 
 
+# Lecture 5
 
+# Notes: 01/27
+
+# Hashes and message authentication
+
+## Objectives
+
+- Create cryptographic constructions that provide integrity and authenticity
+- Identify and explain the three properties of a cryptographic hash.
+- Explain the significance of the birthday paradox to hash function security
+- Explain how HMAC works and why it is needed
+- Identify at least three applications of hash functions
+
+
+## Encryption
+
+- Confidentiality
+- Cannot guarantee data integrity and doesn't provide source authentication
+- Ensure that data is not altered from an authenticated source.
+
+## Authentication vs Integrity
+
+- Sometimes interchangeable. Getting one can give you the other.
+
+### Integrity
+- Data authentication is about ensuring that the data cannot be changed in an unauthorized way.
+- Data has not changed on disk and the data has not changed on transit
+
+### Authentication
+
+- Ensuring that a message originated from a particular source.
+
+## Message Authentication Codes (MACs)
+
+- MACs provide message integrity AND authenticity.
+- MACk(M) : MAC under some key K for a message M.
+- Use symmetric encryption to produce short sequence of bits that depends on both the message (M) and the key (K)
+- MACs should be resistant to *existential forgery*. Eve should not be able to produce a valid MAC for a message M' without the key K.
+- To provide confidentiality, authenticity, and integrity of a message, Alice sends [EK(M), MACK(EK(M))] where EK(X) is encryption of X using key K
+- This proves that M was encrypted(integrity and confidentiality) by someone who knew K(authenticity).
+- In practice, you want to use different keys for E and MAC.
+- Encrypt, then MAC.
+
+## 3 Ways of combining encryption and MAC as discrete operations:
+
+1. Encrypt-then-MAC(EtM) - IPSec. This is the best. Take the message, encrypt and then MAC of the encryption
+2. Encrypt-and-MAC(E&M) - SSH. Bad. Leads tovulnerabilities. Take the message, encrypt it, and mac the message.
+3. MAC-then-Encrypt(MtE) - Used in SSL/TLS: Prone to padding attacks
+
+- All three are used in real protocols, but E&M and MtE require protocol modifications to be strongly unforgeable
+
+
+## Hash Functions
+
+- A hash function is a function with a
+    - Arbitrary and variable length input (called a “pre-image”)
+    - Fixed length output (called a “hash” or “message digest”)
+- Usually seen in a hash table where it helps in efficient searching
+
+## Properties of Hash functions:
+
+- Compression: Reduces arbitrary length string to fixed length hash. Typically very lossy, but still useful.
+- Ease of computation: Given message M, h(M) is easy to compute. The hash function is easy to compute so it is fast.
+
+## Cryptographic Hash Functions
+
+A cryptographic hash function is a hash function with certain properties:
+
+1. Preimage Resistance: 
+- Given digest y, computationally infeasible to find preimage x' such that h(x')=y
+- Also called "one-way property"
+2. 2nd-Pre-Image Resistance: 
+- Given preimage x, computationally infeasible to find preimage x' such that h(x)=h(x')
+- Also called “weak collision resistance” and “target collision resistance"
+3. Collision Resistance: 
+- Computationally infeasible to find preimages i, j such that h(i) = h(j)
+- Also called “strong collision resistance”
+
+## Consequences of these Properties
+
+- For a good cryptographic hash, if you change one bit of the input, the output should change drastically and unpredictably.
+- Outputs are functionally unpredictable.
+- If you need to know if a file has changed, hash it.
+
+# Making and Breaking Hashes:
+
+## Common Hash functions:
+
+- No formal design basis (concern is backdoors)
+- MD2, MD4, MD5 (128 bit). In MD5, they violate target MD5 resistance.
+    - Broken, Broken, Broken
+- SHA-1 (160 bit)
+    - Theoretical weaknesses Practical Collisions Broken
+    - Systems like Git still produce a SHA-1 hash of commits. Changing will cause issues in backward compatibility and security.
+
+- SHA-2 (224, 256, 384, or 512 bit): OK for now. Offers 4 different length of outputs, 224, 256, 284 and 512
+- SHA-3 (variable length): OK for now. Offers variable length output.
+- Attacks only get better as time goes on. - QUOTE
+
+## General structure of a hash:
+
+- Merkle-Daamguard Structure? This gives the name for hash functions such as MD5 as well.
+- Hash function takes an arbitrary length input and provides an output.
+- Build this through using a fixed length input and a smaller fixed-length output. 
+- Compression algorithm.
+- Pre-image is broken into blocks, Y1, ..., Yn
+- f is a compression algorithms
+- After the first block, you carry forward the output of the compression algorithm and mix in the value from the next block of the pre-image.
+-  Naturally leads to a simple design if there is a good compression function
+- If the compression function is good, then the technique is going to be secure.
+- LOOK AT THE DIAGRAM.
+
+## Birthday Attack
+
+- A birthday attack is a name used to refer to a class of brute-force attacks
+- Birthday paradox: the probability that two or more people in a group of 23 share the same birthday is greater than 50%
+
+- General formulation (How to estimate)
+    - On repeated random inputs n={n1, n2, ..., nk},
+    - Pr(ni = nj) > 0.5 => 1.2k1/2, for some 1 <= i, j <= k, 1 <= j < k, i != j
+
+- E.g., 1.2(3651/2) ~= 23
+- Implication: Collisions can be found in approximately square root of the hash output size
+- Hash size is basically cut in half because of the birthday paradox
+
+## How do you find collisions effectively?
+
+
+## Simple Hash Uses:
+
+Commitment Schemes
+- Use a hash to show that I know a secret I don’t want to reveal
+- 0x342c6b4d0e6cde59946ac7f7591c6797
+Finding identical files
+- If two files have the same hash, the odds are very high they are the same files
+- Very good mark of authenticity, one-way property.
+
+## Password Storage
+
+- Problem: the system must have some way of checking a password
+without revealing it to other users or even administrators
+-  Solution:
+    - Simply store the hash of the password
+    - When the user gives their password to log-in, hash their input and compare to the stored hash
+
+- What could go wrong?
+    - Most passwords are bad, so search a pre-computed list of hash values of top 1 mil commond passwords or something and just check.
+- The fix:
+    - Slow hash functions (bcrypt, scrypt, repeated hashing)
+    - Salting: i.e., store [salt, h(salt | password)]
