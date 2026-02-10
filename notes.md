@@ -337,6 +337,8 @@ Alice sends a message to Bob in a public place.
 - One-time pad is impossible to break, you cannot do better than it for confidentiality
 - Two-time pad is trivial to break; it's terrible
 - Thinking using something too many things is better works
+- You need as much purely random keystream as the message you want to send.
+- Don't use it because of key storage and key distribution
 
 ## Questions:
 1. If you use it twice, it makes it a Legionnaire cipher.
@@ -388,6 +390,7 @@ Alice sends a message to Bob in a public place.
 
 ## Block ciphers:
 
+- fixed length input, fixed length output
 - Confusion hides the relationship between the ciphertext and the key.
 - Diffusion hides the relationship between the plaintext and the ciphertext
 - Distributive plaintext statistics over the ciphertext.
@@ -490,6 +493,24 @@ A cryptographic hash function is a hash function with certain properties:
 - Computationally infeasible to find preimages i, j such that h(i) = h(j)
 - Also called “strong collision resistance”
 
+
+#### It's about whether the adversary can decide what value to collide against.
+
+- SHA-4 = {0 , 0
+            1, 0
+            x, SHA-3(x)}
+
+- Collision resistant doesn't mean they don't have collisions, it means that you can't find it
+- Does SHA-4 have strong collision resistance? No, because they'll just pick 1 or 0 and get the collision
+- Is SHA-4 have weak collision resistance? Yes, because you can select a number and tell them to find.
+
+### Why is one of them strong and one of them weak?
+
+- The adversary has more control over the process
+- Find me two numbers that have the same hash for a million dollars vs find one
+- Strong works against more adversaries or smn?
+- Always try to select something that is stronger, obviously.
+
 ## Consequences of these Properties
 
 - For a good cryptographic hash, if you change one bit of the input, the output should change drastically and unpredictably.
@@ -562,3 +583,219 @@ without revealing it to other users or even administrators
 - The fix:
     - Slow hash functions (bcrypt, scrypt, repeated hashing)
     - Salting: i.e., store [salt, h(salt | password)]
+
+## Using hashes as authenticators
+
+Consider the following scenario
+– Prof. Smart E. Pants has not decided if she will cancel the next lecture.
+– When she does decide, she communicates to Bob the student through Mallory, her
+evil TA.
+– She does not care if Bob shows up to a cancelled class, but she does not want
+students to not show up if the class hasn’t been cancelled
+– Prof. Pants does not trust Mallory to deliver the message.
+• Prof. Smart E. Pants and Bob use the following protocol:
+– Prof. Pants invents a secret t
+– Prof. Pants gives Bob h(t), where h() is a crypto hash function
+– If she cancels class, she gives t to Mallory to give to Bob
+– If does not cancel class, she does nothing
+– If Bob receives the token t, he knows that Prof. Pants sent it
+
+### Why is this protocol secure?
+- t acts as an authenticated value (authenticator) because
+Mallory could not have produced t without inverting h()
+- Note: Mallory can convince Bob that class is occurring
+when it is not by simply not delivering t (but we assume
+Bob is smart enough to come to that conclusion when the
+room is empty)
+
+- Note that it is important that Bob gets the original value h(t)
+from Alice directly (was provably authentic)
+
+### What is happening here?
+- Check it against the hash I gave you previously, and use that authenticated value to validate and know what is happening
+
+## Hash Chain
+
+- Now, consider the case where Alice wants to do the same protocol, only for all 26 classes
+(the semester)
+- Alice and Bob use the following protocol:
+    - Alice invents a secret t
+    - Alice gives Bob H26(t), where H26() is 26 repeated uses of H().
+    - If she cancels class on day d, she gives H(26-D)(t) to Mallory, e.g., • If cancels on day 1, she gives Mallory H25(t)
+- If cancels on day 2, she gives Mallory H24(t)
+- .......
+- If cancels on day 25, she gives Mallory H~1~(t)
+- If cancels on day 26, she gives Mallory t
+- If Alice does not cancel class, she does nothing
+- If Bob receives the token t, he knows that Alice sent it
+
+## Merkle Hash Tree
+
+## Creating a MAC from a Hash
+
+- Consider the following simple hash-based MAC
+    - MACk(M) = h(k|M)
+- Suppose Eve wanted to append M’ to M?
+    - Goal: compute h(k|M|M’) without knowing k
+
+- Solution: Use h(k|M) as IV for next f iteration in h()
+- Known as a Message Extension Attack
+
+- When we do MEA, it's like we're concatenating on the input, like adding an m2. H(K||H(k||m) || m2)
+
+- HMAC(m1 || m2) = H(k || H(K || m1 || m2))
+- your adversary has failed to convince you is to, figure out the second term and do it backwards or get the key value, and do it forwards.
+- But because of the one-way property, they can do neither.
+- Difference between simple hmac and real hmac is the xor.
+- The ipad and opad values are constant EVERYWHERE. Only purpose is to make sure the key on the inside and outside are different. Key values should be different for different purposes. Can break otherwise.
+
+- Bitmasks are orthogonal? something
+- Keys for different purposes should have different values. If you don't do it, it's fine, it might not break, but you should do it and it can def break. More info later in the class :D
+
+- Q: Why does it 
+- A: You can compute a value that extends simple HMAC, as in, the m2 value, can be computed. In the inner one, it's not possible to do. Basically, H(k|| m1 || m2) which is the inner one is not possible
+
+## A Better MAC
+
+### Objectives
+- Use available hash functions without modification
+- Easily replace embedded hash function as more secure ones are found
+- Preserve original performance of hash function
+- Easy to use
+
+## To be continued
+
+# Lecture 6
+
+# Notes Online class
+
+## Objectives
+
+- Explain common uses of RSA
+- Explain the components of RSA public and private keys and their relationship
+- Given a small public/private key, encrypt/decrypt a message using RSA
+- Identify and explain the hard problem underlying RSA
+- Explain digital signatures, common uses, and compute a digital signature given a small RSA public/private key pair
+- Explain the differences between a digital signature and an HMAC
+
+## Asymmetric Crypto
+
+Separate keys for encryption and decryption
+- Public key: anyone can know this
+- Private key: kept confidential
+- Alice and Bob no longer have to have a priori shared a secret key
+    - Anyone can encrypt a message to you using your public key
+    - The private key (kept confidential) is required to decrypt the communication
+
+- Is there still a problem? – Stay tuned for next class
+
+- Each key pair consists of a public and private component: k+
+(public key), k- (private key)
+
+- Public keys are distributed (typically) through public key certificates
+    - Anyone can communicate secretly with you if they have your correct certificate
+
+- don't worry about rsa key gen stuff. why we care about factoring
+- diffie hellman
+
+# Lecture 8 - 02/10
+
+# Key Management
+
+## Key distribution
+- process where we assign and transger keys to a participant
+- Out of band(passwords) , during authentication(kerberos)
+
+## Key agreement
+- two parties negotiate a key
+- two or more participants
+- Occurs in conjunction with authentication
+
+### How do we distribute keys?
+- Secure key distribution without asymmetric cryptography is difficult.
+- Simple approach: send key through an out-of-band channel
+- It's a weird problem, you need security for the thing that helps us secure things, i.e., keys, that's why the out-of-band channel is simple.
+### Cons
+- it doesn't always work, you can't do this going there approach
+- It's slower, and it's easy(to describe)
+
+
+NC2 keys are required for pairwise key distribution
+
+### What if there is no channel?
+
+- Alice and Bob are gonna form a secret while Eve is listening and Eve is not going to know about it.
+
+## Diffie-Hellman(DH) Key Agreement:
+
+- This forming of the secret is called DH and the paper was revolutionary.
+- Negotiate a secret over an insecure media
+- Take two primes and multiply them, finding the factors of the product is very hard.
+
+### Natural Log problem:
+
+- log g(x) = i
+- Given g and x, it is easy to find i such that g^i = x
+
+### Discrete Log Problem
+
+- Diffie-Hellman starts with this problem.
+- dlog g,p(x) = i
+- 
+
+## DH Key Agreement
+
+- System chooses g(base) and p(prime)
+- Eve cannot compute K without knowing either a or b, even if she passively intercepts all comms.
+- if he tries to find a or b, he hits the discrete log problem and with a p that is big enough, it is computationally infeasible.
+- A = g^a mod p; B= g^b mod p; K = A^b mod p; K = B^a mod p
+- g is generator
+- p has to be prime
+
+- g = 4; p = 13; x is less than p-1; 2-11
+- cooked against powerful adversaries
+
+
+x = 6; 
+### Elliptic curve dh
+
+- works under modular arithmetic normally
+- over the set of functions called ellptic curves
+- nobody understands it, leave it.
+
+### On-path attacks on DH
+
+- This is key agreement, not authentication.
+- Mallory intercepts messages from both and gets the values
+
+- Definitely not the only thing vulnerable to this.
+- Not sure if the adversary is in a position to know the keys or not.
+
+### Authenticated DH
+- Alice and Bob sign the shares.
+
+### Perfect forward secrecy
+- K is valid just for the session
+- Cannot be computed later if the adversary obtains
+    - all network traffic
+    - either or both private keys.
+- you have future problems, not past problems.
+
+## Why not use a DB?
+- Every user has a public/private key.
+- A trusted third party runs it.
+- PGP: Pretty good privacy
+- PGP Key server: look up the key on the server, put it in your client app.
+- Can they maintain avalability? and not replace them or something
+- Key signing.
+
+## Solving the turtles problem
+- Need to have a recursive base case
+
+## Certificates bind identities to public keys.
+
+- signed by some Certificate Authority(CA)
+- Has a validity period
+- Identity may have been vetted by a registration authority
+
+- People trust a CA to vet identity.
