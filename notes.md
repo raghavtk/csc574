@@ -780,7 +780,7 @@ x = 6;
     - all network traffic
     - either or both private keys.
 - you have future problems, not past problems.
-
+`
 ## Why not use a DB?
 - Every user has a public/private key.
 - A trusted third party runs it.
@@ -789,13 +789,82 @@ x = 6;
 - Can they maintain avalability? and not replace them or something
 - Key signing.
 
+# Lecture 9 - 02/12
+
+## Web of Trust Model
+
+- A trusts B, B trusts C, C trusts D, so A trusts D? and so on.
+- Everyone is a certain number of hops away(6 degrees of kevin bacon)
+- Used for PGP/GPG key management.
+
 ## Solving the turtles problem
 - Need to have a recursive base case
+- Root of trust needs to be decided which is the recursive base case.
+- If you don't have that, you recurse forever, 
+- the turtles problem means that the turtle carries the earth on its back. What's under the turtle, another turtle and so on? Old folklore.
 
-## Certificates bind identities to public keys.
+## Certificates
 
-- signed by some Certificate Authority(CA)
-- Has a validity period
+- A certificate is a data structure that contains identity information, a public key and is signed by a Certificate Authority(CA).
+- Signed by some Certificate Authority(CA)
+- Bind identities to public keys.
 - Identity may have been vetted by a registration authority
-
+- Has a validity period.
 - People trust a CA to vet identity.
+- HTTPS is an example of this where S is the word secure and that validates against it. Caches, checks.
+- Anything in your root certificate list is, gets to decide who the actual entity is. Decides which CA you can trust, and which is the real Amazon, for instance.
+
+## Questions
+- Every time you set up a new TLS connection, you set up a certificate check. 
+- Can cache that info, lookup a few KB of data basically.
+- The root certificate list changes only when the system update for it happens.
+- Who authorizes the CAs? The companies themselves
+- Are they regulated? No.
+- Difference between RA and CA? 
+- Netscape was working on TLS, 
+- Mike Rider
+- Didn't know whether the people who check identities and issues the certificates are the same.
+
+
+### Public Key Infrastructure - PKI
+
+- Any CA may sign any certificate.
+- Browser weighs all root CAs equally.
+- Caused DigiNotar.
+- Cert pinning
+
+## CA Pinning
+
+## Certficate Transparency
+
+- Monitor and audit certificates
+- Allows efficient
+
+## Revocation of Certificates
+
+- Lost private key, compromised or owner no longer authorized.
+
+- Revocation is hard, the verifiers need to check revocation state
+- Revocation state must be authenticated.
+- If you can change a system clock(difficult), you can use an expired CA.
+
+
+## Getting HTTPS is hard
+- Use "Lets encrypt", which was a developed CA, and Certificate Issuance and Renewal Protocol called ACME and will issue certificates.
+- Getting it is hard, and have to pay someone 20$. Changed about 10 years ago.
+- Build phishing sites at scale with a valid TLS certificate.
+
+
+
+## Digtal Signatures
+- ONLY sign and verify
+- encrypt and decrypt is the opposite.
+- Anyone with verification key can verify.
+- Nobody can create a dfferent message-signature pair
+- Cannot modify or fabricate them.
+- Decryption key should be private, verify key should be public.
+
+
+## Obtaining a certificate
+
+- Alice has some identity document A 
