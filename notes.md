@@ -1,8 +1,10 @@
 # Computer Network Security: CSC574
 
-# Lecture 1: 13/01: Notes
+# Lecture 1: 13/01 
 
-## What do you hope to learn in this course
+# Notes
+
+## What do you hope to learn in this course?
 
 1. Learn the fundamentals of security, layer by layer
 2. Learn good practices and writing secure code
@@ -11,8 +13,8 @@
 5. How do mobile networks work i guess?
 6. Systems attacks and defences
 
-- reading is 10% of the grade
-- project
+- Reading is 10% of the grade
+- Project
 
 ## What does it mean for a system to be secure?
 
@@ -22,7 +24,7 @@
 
 - The data in a particular part of the system does not provide infor about the entire system.
 
-## Important definitons
+## Important definitons:
 
 - Security: If it can maintain well-specified properties despite the actions of well-specified adversaries. - IMPORTANT
 
@@ -33,7 +35,8 @@
 - Trust model + threat model = security model
 
 
-# Lecture 2: 15/01 Notes: 
+# Lecture 2: 15/01 
+# Notes: 
 
 
 ## What we'll be tested on:
@@ -42,17 +45,17 @@
 3. Create and critique security models for familiar systems
 4. Go through the slides and figure out questions.
 
-Today:
 
 # Fundamentals: Today is terminology day
 
 ## CIA Triad:
 
 1. Confidentiality: Protect against unauthorized disclosure.
-2. Integrity: social media or something, where you want the identity to be verified, but data is out
+2. Integrity: Protect against unauthorizedmodification.
+Eg. Social media or something, where you want the identity to be verified, but data is out
 3. Availability: Protect and maintain authorized access: Shouldn't be able to just turn it off
 
-- When integrity over confidentiality? social media, open-source code, your signature on a public form,
+- When integrity over confidentiality? social media, open-source code, your signature on a public form, etc. 
 
 
 ### Which is the most important? depends on your security model, i.e., the context.
@@ -66,33 +69,41 @@ Cost - hmm
 Extra in the list:  
 resiliency  
 non-repudiation  
+Resiliency - Availability
+I - Auditability  
+Accounting  
+Non-repudiation  
 
-I - auditability  
-accounting  
-non-repudiation  
-
-- Anonymity is completely different from privacy
+Anonymity is completely different from privacy
 
 ## Assets: What we protect:
 
-1. Hardware resources, 2. network access, 3. operating systems, 4. software, 5. data
+1. Hardware resources,
+2. Network access, 
+3. Operating systems, 
+4. Software, 
+5. Data. The first five are common.
 6. Users can be considered as assets that deserve protection on their own.
 7. User Time: if you're a bank and you're being attacked and you keep the system up and a click takes 5 mins to process. User Time is wasted, literally.
-8. Reputation.
+8. Reputation. (some password manager are better than ours, once reputation gone, value gone)
 9. Money managed by system
 
-## Participants: computers, agents, people, enterprises. Sometimes referred to as: principals, servers, clients, users, entities, hosts, routers
+## Participants: 
+- Computers, agents, people, enterprises. 
+- Sometimes referred to as: principals, servers, clients, users, entities, hosts, routers
 - Expected systems, entities.
-- Security is defined w.r.t these entities.
+- Security is defined and analyzed w.r.t these entities.
 - Every party may have unique view.
 
-#### A trusted third party = trusted by all parties for some set of actions, often used as introducer or arbiter
+#### A trusted third party = trusted by all parties for some set of actions, often used as introducer or arbiter.
 
 
 ## Adversaries:
 Anyone attempting to violate your trust model: circumvent the security infrastructure.
 
 Fundamental difference between security and safety/reliability/quality is because of the notion of an adversary.
+
+Adversaries are aware, motivated and adaptive.
 
 ## Characterizing adversaries:
 
@@ -112,27 +123,30 @@ Fundamental difference between security and safety/reliability/quality is becaus
 - Weaken geopolitical adversary
 - Foreign or domestic espionage
 
-## Threat: some potential violation of your security model.
+## Threat: A potential for violation of your security.
 - Can be intentional or accidental
-- Potential for violation of security, which
+- A circumstance, capability, action, or event that could breach security and cause harm.
+- Threats are impotent without a vulnerability to exploit.
+- Can be caused by bad design causing it to be inadequte
 
-
-## Vulnerability: a flaw that exposes the user, data or system to a threat.
-Eg. Buffer overflows, WEP key leakage etc.
-Where do they come from? bad software or hardware.
-Poor understanding of requirements/bad design
-Bad policy/configuration
-System misuse
-Unitended purpose or environment
+## Vulnerability: A flaw that exposes the user, data or system to a threat.
 
 - Vulnerabilities can be latent and may be protected by other code
 so a vulnerability still exists,
+- It is a vulnerability if it can be exploited to lead to a compromise.
 
-- A vulnerability exists if it can be exploited.
+Eg. Buffer overflows, WEP key leakage etc.
+
+Where do they come from? 
+- Bad software or hardware.
+- Poor understanding of requirements/bad design
+- Bad policy/configuration
+- System misuse
+- Unitended purpose or environment
 
 
 ## Attack:
-- Occurs when adversary attempts to exploit a vulnerability.
+- Occurs when adversary attempts to exploit a vulnerability. Taking over/altering resources.
 ## Compromise:
 - Occurs when an attack is successful. The data can be used in some way.
 
@@ -146,6 +160,9 @@ C = Cost of impact
 
 Sometimes, R = P*C
 p = Probability attacker is successful
+
+- When we talk about risk, we talk about likelihood and impact.
+- It is always more qualitative than quantitative.
 
 ## Threat model:
 - Systematic identification of the threats a systems faces
@@ -173,9 +190,10 @@ p = Probability attacker is successful
 3. Bsides
 
 
-# Lecture 3: 01/20: Notes
+# Lecture 3: 01/20: 
+# Notes
 
-## Authentication: Who are you
+## Authentication: Who are you?
 Specify our policies and security in terms of identity.
 
 ## Authorization: What are you allowed to do?
@@ -225,7 +243,7 @@ It's not easy because,
 
 ## Cost:
 - Could be economic, engineering time, user time, usability, services, 
--
+- 
 
 ## Principle of Adequate Protection:
 
@@ -868,3 +886,250 @@ x = 6;
 ## Obtaining a certificate
 
 - Alice has some identity document A 
+
+# Lecture 10
+# Notes
+
+# Authentication protocols
+
+
+## Definitions
+
+1. Use cryptography to evaluate a protocol
+2. To provide proof-of-knowledge of a cryptographic 
+
+## Goals
+
+1. (Always) verify the identity of "initiator" or "client"
+2. (Usually) Verify identity of "server"
+3. (Usually) Ensure "session" remains restricted to authorized parties.
+4. (Usually) Establish "session key" or other mechanism to preserve confidentiality/integrity
+
+## Part 2: Setting + Security Model
+
+- Participants: A - "Alice", "client" or "init"
+                B- "Bob","server" or "responder"
+- Adversaries: E - "Eve", passive adversary
+               M - "Mallory", active adversary
+
+
+## Dolev Yao Threat Model
+
+1. M can read, drop, modify or fabricate ANY me
+ssage to/from ANY channel.
+2. M can run multiple sessions serially or concurrently.
+3. M knows the system/protocol + Cryptographic primitives, param, protocols
+4. At the start of an evaluation, M doesn't know the keys and the cryptographic assumptions hold.
+
+- Referred to as Dolev Yao adversaries
+
+- Question: Adversary v attacker: Attacker is currently attacking, adversary has potential to attack
+- for all intents and purposes, there's not much of a difference.
+
+# Lecture 11?
+
+# Notes
+
+## Network Security Definitions:
+
+## Properties of who?
+- Network infrastructure
+- Network services
+- Network users
+
+## Adversaries
+
+- Passive eavesdroppers
+- Active Dolev-Yao Attackers(aspiration for every attacker)
+- compromised endpoints/servers
+- small-scale DoS-er
+- Bulk-scal DoS-er
+
+## CIA Properties Again
+
+## Ping-of-death
+
+
+
+# Lecture 13
+
+# Notes
+
+## Objectives
+
+- IP message spoofing, sequence number guessing, port scanning and ARP spoofing
+- define and compare stateles and stateful firewalls
+- Write a firewall
+
+## ARP Spoofing
+
+## MAC address
+
+- Unique identifier for hardware
+- Bound to the physical network interface, port or antenna
+- Do VMs have MACs? Yes, as low as one per VM, as high as wahtever
+- A value that some entity claims as identity
+- MAC addresses are in the Data Link Layer, 
+- IPs in Network layer, port numbers in Transport Layer
+- Switches and switching
+- L3 Switch
+- Networks route, networks help you get across multiple links through a route
+- The Link layer, learn the diff between routing and switching
+
+## Address Resolution Protocol(ARP)
+
+- How does Alice communicate with Bob over a LAN? ARP
+- Protocol: Alice broadcasts, who has this IP?
+- Bob responds, "I do!!"
+
+## Defenses
+
+
+## Network Scanning
+
+- 
+# Lecture 17
+
+# Notes
+
+## Wireless Security
+
+- CIA Triad
+- Convenience and mobility(leads to location)
+- Authentication
+- Privacy
+- Location(touches on privacy)
+- Identities
+
+- In wireless, you are always a Dolev-Yao adversary
+- Read, intercept, fabricate is easy.
+- Modification is tricky, but doable(even 4G/5G)
+
+## Confidentiality:
+
+1. Traffic
+- User plane content- If you connect to WiFi to send something, the bits you send
+- Metadata and control plane content
+- Transmission patterns; side channels, tracking
+
+#### How packet streams can determine what content you are doing.
+- You can understand the type of content obtained based on the packet stream coming in.
+- Cellular is worse, because the pushes are scheduled.
+- Privacy, censorship and anonymity- mess up the thing
+- why not introduce randomness from the host.
+
+2. Identities in network
+- HW Addr, IP Addr, MAC Address, 
+- Link identities, for eg. hardware Address, to packet information or something
+- MAC Address Randomization- They are not static, or
+- It is a privacy issue. 
+
+
+3. Source/destination of messages
+3. Location of entities in the network
+4. Maybe: Reflected waveforms
+- UHF and mmWave bands can be used for sensing
+- Those machines in the airport are mmWaves 
+- 5G is also waves
+- 
+
+
+### Authentication:
+
+- Analog jamming
+- Digital jamming
+
+# Lecture 20?
+
+# Notes
+
+## Intrusion Detection/Prevention
+
+## Old school
+
+1. NIDS
+2. HIDS
+3. Anti-virus
+4. Intrusion Prevention System
+5. Honeypot/Honeynet
+
+## Problems leading to the new world
+
+1. Silos
+2. Encryption
+- "TLS everywhere" breaks payload inspection
+- Detection moves to the endpoint
+3. Mobility: 
+- Starting moving to CDNs,
+- People have their own devices even at universities
+- No single chokepoint
+- No idea what the perimeter of the network actually is.
+- Zero Trust Architectures
+4. Convergence
+- HIDS + AV + Host firewall: 
+- - EDR(Endpoint Detection & Response)
+- EDR + NIDS + CLoud Telemetry: Crowdstrike uses this
+- - XDR: Extended Detection and Response
+
+Security Operation Center(SOC)
+Security Information and Event Management(SIEM)- aggregate and correlate alerts
+
+Security orchestration, automation, and response (SOAR)- automates the triage
+
+
+## Signature detection
+
+- if it can be described as a satisfiable language, you can do signature detection
+
+
+## Anomaly detection
+
+1. Underlying assumption, malicious will look different from non-malicious
+
+2. Paradigm
+
+## Evaluating an IDS
+
+1. Confusion matrix
+2. Precision Recall shi
+
+
+## Tuning an IDS
+
+- Most detectors are tunable
+- Making these decisions in an arbitrary way is not ideal.
+
+### ROC Curve(AUC)
+
+- TPR(y) vs FPR(x)
+- 
+
+## Base rate fallacy
+
+# Lecture 22?
+
+# Notes
+
+# Access Control
+
+## Protection Principles:
+
+### Saltzer Schroeder Principles
+
+1. Economy of Mechanism
+- keep the design as simple and small as possible
+- fewer bugs, lower maintainability, harder to verify if it's correct(auditability)
+- 
+2. Fail-safe defaults
+- Default settings should deny access unless explicitly granted.( Default deny)
+- Minimizes risk of accidental exposure or modification
+3. Complete Mediation
+- Every access to a resource must be checked against the access control policy.
+- Prevents unauthorized access through cached permissions or other shortcuts.
+- Very difficult to implement, can't add security later.
+4. Open Design
+- 
+5. Least privilege
+6. 
+7. 
+8. 
