@@ -1128,8 +1128,167 @@ Security orchestration, automation, and response (SOAR)- automates the triage
 - Prevents unauthorized access through cached permissions or other shortcuts.
 - Very difficult to implement, can't add security later.
 4. Open Design
-- 
-5. Least privilege
-6. 
-7. 
-8. 
+- The design of the system should be open to scrutiny and not rely on secrecy for security.
+- Kirckhoff's principles: The enemy knows the system, should not rely on the ignorance of potential attackers.
+5. Separation of privilege
+6. Least privilege
+- Every program and user should operate using the least set of privileges necessary to complete the task.
+- Minimizes damage from attacks
+- web server doesn't need administrative privileges
+7. Least common mechanism
+- Minimize the amount of mechanism cmmon to more than one user and depended on by all users. (prevent shared resource)
+- Every shared mechanism represents a potential information path between users and must be designed carefully.
+- Two processes that share the same filesystem cache may inadvertently share sensitive information.
+- Isolation is very important in system security.
+8. Psychological acceptability
+- Security mechanisms should not make the resource more difficult to access than if the mechanism were not present.
+
+## Access policy enforcement
+
+- Protection State: Defines what each subkect can do to each object, or the access control policy.
+- Reference monitor: Enforces the protection state.
+
+- A correct reference monitor implementation meets the following guarantees
+1. Complete mediation
+2. Tamper-proof: The reference monitor cannot be modified or bypassed.
+3. Verifiable: The reference monitor must be small enough to be verified
+ 
+- A protection system is the protection state, the operations to protect that state, and the reference monitor that enforces the protection state.
+
+## Access control matrix
+
+- An access control matrix is a table that defines the access rights of subjects to objects.
+- Rows represent subject S, columns represent obkects O, and entries represent the rights R.
+- A matrix is not used that much, because it is SPARSE.
+- Use an adjacency list instead.
+
+## Approaches of adjacency list:
+
+- Two common approaches:
+1. Access control list: Store a list of subjects and their rights for each object.
+2. Capability list(C-List)- Store list of objects and their rights for each subject.
+
+What is capability: 
+
+- Which one should you use?
+
+- One consideration is where the reference monitor is, if it's closer to the subjects or objects.
+
+## Discretionary access control(DAC)
+
+- In a DAC system, the owner of an object determines who can access that object and what rights they have.
+- The owner can modify the access control policy for their objects at their discretion.
+
+- Filesystems are DACs.
+- The Unix file permission models is a classic example of DAC.
+- Each file has an owner, a group, and a set of permissions for the owner, group. and others.
+- Permissions include read(r), write(w), and execute(x).
+
+## Unix file permissions
+
+- You need to have execute rights to parent directories to access a file.
+- A user can delete a file if they have write access to the directory containn the file,
+- Access rights are determined on a first-match-wins order,
+
+## Mandatory Access Control (MAC):
+
+- In a MAC system, the system enforces a fglobal access control policy that cannot be modified by users.
+- In contrast to DAC systems where subjects are users and objects are files, in MAC systems, both subjects and objects are labels.
+- Concrete subjects and objects are marked as labels.
+
+Example: SE Linux
+
+# Lecture 23
+
+# Notes
+
+## Integrity Models
+
+## Role-based Access Control(RBAC)
+
+- A role is a collection of privileges/permissions associated with some function or affiliation.
+- In contrast to groups, the role
+
+## Attribue Based Access Control (ABAC)
+
+- Uses attributs of users, objects, and the environment to make access control decisions.
+- Attributes can include user roles, object classifications, time of access, location, and more.
+- Often expressed as logical rules.
+
+## Next Generation Access Control(NGAC):
+
+- Combines the concepts of roles, attributs, and policies to create a more flexible and powerful access control model.
+- It organizes object
+
+## Objectives
+
+- unix environment deputies
+- sandboxing, reference monitors
+- virtualization
+- containers
+
+## UNIX Security
+
+- classic DAC system
+- anything that is a subject is a user
+- any object is a file, and access control policy is spcified on files.
+- Communicate to kernel with a system interrupt or write to certain files and the kernel will get the message.
+
+### Filesystem namespace
+
+- The filesystem defines a namespace that converts a name to a system resource
+- The same file can be accessed via different paths.
+## Attacks on Name resolution
+### Improper binding attack:
+
+- Adversar
+
+### TOCTOU: Time Of check to Time of Use
+- Race condition that exploits non-atomicity in "check" and "use" of resource to conduct improper resource and binding attacks.
+
+## Sandboxing:
+- An execution environment for programs that contains a limited set of rights
+- - a subset of your permissions
+- - cannot be changed by a running program
+
+## UNIX chroot
+
+- Creates a domain in which a process is confined
+
+
+## Multics
+
+- was created in 1960s by MIT, Bell Labs,
+- High point in scure system design
+- hierarchical filesystems, dynamic linking
+- Secrecy: multi-level security
+- Integrity: rings of protection
+- Reference monitoring: mediats segment access, ring crossing.
+
+
+# Lecture 24
+
+# Notes
+
+## Vulnerabilities
+
+- Thinking: Fast & Slow
+
+- System 1: Stress
+- - Time pressure
+- - Fight or flight
+- - Strong emotions
+- - Hunger
+
+- Routine
+- Consistency Bias
+
+### Relational/ Social
+
+- Authority bias
+- Liking/ rapport bias
+- Conformity & Social Proof
+
+### Incentives
+
+- Needs
